@@ -39,7 +39,8 @@ public class RegistrationTests extends TestBase {
         $(".modal-dialog").should(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Elena"), text("Sokolova"),
-                text("e.sokolova@example.com"), text("1234567890"));
-
+                text("e.sokolova@example.com"), text("1234567890"), text("07 July,1989"), text("English"),
+                text("Sports"), text("nature.jpg"),
+                text("Some address"), text("Rajasthan Jaipur"));
     }
 }
