@@ -14,10 +14,12 @@ import java.util.Map;
 public class RemoteTestBase {
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
+        Configuration.browserSize = System.getProperty("screenResolution", "1920x1080");
+        Configuration.remote = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -29,12 +31,12 @@ public class RemoteTestBase {
     }
 
     @BeforeEach
-    void addListener(){
+    void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
     @AfterEach
-    void addAttachments () {
+    void addAttachments() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
