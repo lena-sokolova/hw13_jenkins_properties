@@ -15,7 +15,6 @@ public class RegistrationRemoteTests extends RemoteTestBase {
 
     @Test
     @Tag("remote")
-    @Tag("property")
     @DisplayName("Successful registration")
     void successfulRegistrationTest() {
         step("Open form", () -> {
