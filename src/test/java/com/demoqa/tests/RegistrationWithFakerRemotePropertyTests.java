@@ -23,7 +23,6 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
                     .openPage()
                     .closeBanners();
         });
-
         step("Fill form", () -> {
             registrationPage
                     .setFirstName(TestData.firstName)
@@ -40,7 +39,6 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
                     .setCity(TestData.city)
                     .clickSubmitBtn();
         });
-
         step("Verify results", () -> {
             registrationPage
                     .checkModalDialogVisible()
