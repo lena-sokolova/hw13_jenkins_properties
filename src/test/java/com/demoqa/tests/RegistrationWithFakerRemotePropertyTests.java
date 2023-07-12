@@ -71,8 +71,8 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
                     .checkResult("Hobbies", hobbies)
                     .checkResult("Picture", pictureName)
                     .checkResult("Address", currentAddress)
-                    .checkResult("State and City", state + " " + city)
-                    .closeTableResponsive();
+                    .checkResult("State and City", state + " " + city);
+//                    .closeTableResponsive();
         });
     }
 }
