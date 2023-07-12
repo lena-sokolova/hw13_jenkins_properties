@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.demoqa.utils.RandomUtils.*;
+import static io.qameta.allure.Allure.step;
 
 
-public class RegistrationWithFakerRemotePropertyTests extends TestBase {
+public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
@@ -18,7 +19,6 @@ public class RegistrationWithFakerRemotePropertyTests extends TestBase {
     @Tag("property")
     void successfulRegistrationTest() {
         Faker faker = new Faker();
-//        Faker faker = new Faker(new Locale("ru"));
 
         String firstName = faker.name().firstName(),
                 lastName = faker.name().lastName(),
@@ -35,34 +35,41 @@ public class RegistrationWithFakerRemotePropertyTests extends TestBase {
                 state = getRandomState(),
                 city = getRandomCity(state);
 
-        registrationPage.openPage()
-                .closeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setUserEmail(userEmail)
-                .setGender(gender)
-                .setUserNumber(userNumber)
-                .setBirthDay(day, month, year)
-                .setSubject(subject)
-                .setHobby(hobbies)
-                .uploadPicture(pictureName)
-                .setCurrentAddress(currentAddress)
-                .setState(state)
-                .setCity(city)
-                .clickSubmitBtn();
+        step("Open form", () -> {
+            registrationPage.openPage()
+                    .closeBanners()
+        });
 
-        registrationPage
-                .checkModalDialogVisible()
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", day + " " + month + "," + year)
-                .checkResult("Subjects", subject)
-                .checkResult("Hobbies", hobbies)
-                .checkResult("Picture", pictureName)
-                .checkResult("Address", currentAddress)
-                .checkResult("State and City", state + " " + city)
-                .closeTableResponsive();
+        step("Fill form", () -> {
+            registrationPage.setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setUserEmail(userEmail)
+                    .setGender(gender)
+                    .setUserNumber(userNumber)
+                    .setBirthDay(day, month, year)
+                    .setSubject(subject)
+                    .setHobby(hobbies)
+                    .uploadPicture(pictureName)
+                    .setCurrentAddress(currentAddress)
+                    .setState(state)
+                    .setCity(city)
+                    .clickSubmitBtn();
+                });
+
+        step("Verify results", () -> {
+            registrationPage
+                    .checkModalDialogVisible()
+                    .checkResult("Student Name", firstName + " " + lastName)
+                    .checkResult("Student Email", userEmail)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", userNumber)
+                    .checkResult("Date of Birth", day + " " + month + "," + year)
+                    .checkResult("Subjects", subject)
+                    .checkResult("Hobbies", hobbies)
+                    .checkResult("Picture", pictureName)
+                    .checkResult("Address", currentAddress)
+                    .checkResult("State and City", state + " " + city)
+                    .closeTableResponsive();
+        });
     }
 }
