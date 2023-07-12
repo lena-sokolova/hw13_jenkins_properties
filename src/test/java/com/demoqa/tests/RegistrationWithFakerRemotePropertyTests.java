@@ -36,8 +36,9 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
                 city = getRandomCity(state);
 
         step("Open form", () -> {
-            registrationPage.openPage()
-                    .closeBanners()
+            registrationPage
+                    .openPage()
+                    .closeBanners();
         });
 
         step("Fill form", () -> {
@@ -54,7 +55,7 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
                     .setState(state)
                     .setCity(city)
                     .clickSubmitBtn();
-                });
+        });
 
         step("Verify results", () -> {
             registrationPage
