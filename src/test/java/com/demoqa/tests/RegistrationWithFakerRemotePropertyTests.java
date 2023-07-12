@@ -3,6 +3,7 @@ package com.demoqa.tests;
 import com.demoqa.pages.RegistrationPage;
 import com.demoqa.utils.RandomUtils;
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
     @Test
     @Tag("remote")
     @Tag("property")
+    @DisplayName("Successful registration")
     void successfulRegistrationTest() {
         Faker faker = new Faker();
 
