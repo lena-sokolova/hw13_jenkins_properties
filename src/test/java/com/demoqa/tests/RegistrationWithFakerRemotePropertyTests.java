@@ -20,22 +20,22 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
     @Tag("property")
     @DisplayName("Successful registration")
     void successfulRegistrationTest() {
-        Faker faker = new Faker();
-
-        String firstName = faker.name().firstName(),
-                lastName = faker.name().lastName(),
-                userEmail = faker.internet().emailAddress(),
-                gender = getRandomGender(),
-                userNumber = faker.phoneNumber().subscriberNumber(10),
-                day = String.valueOf(faker.number().numberBetween(0, 31)),
-                month = getRandomMonth(),
-                year = String.valueOf(RandomUtils.getRandomInt(1980, 1989)),
-                subject = getRandomSubject(),
-                hobbies = getRandomHobbies(),
-                pictureName = "nature.jpg",
-                currentAddress = faker.address().fullAddress(),
-                state = getRandomState(),
-                city = getRandomCity(state);
+//        Faker faker = new Faker();
+//
+//        String firstName = faker.name().firstName(),
+//                lastName = faker.name().lastName(),
+//                userEmail = faker.internet().emailAddress(),
+//                gender = getRandomGender(),
+//                userNumber = faker.phoneNumber().subscriberNumber(10),
+//                day = String.valueOf(faker.number().numberBetween(0, 31)),
+//                month = getRandomMonth(),
+//                year = String.valueOf(RandomUtils.getRandomInt(1980, 1989)),
+//                subject = getRandomSubject(),
+//                hobbies = getRandomHobbies(),
+//                pictureName = "nature.jpg",
+//                currentAddress = faker.address().fullAddress(),
+//                state = getRandomState(),
+//                city = getRandomCity(state);
 
         step("Open form", () -> {
             registrationPage
@@ -44,34 +44,35 @@ public class RegistrationWithFakerRemotePropertyTests extends RemoteTestBase {
         });
 
         step("Fill form", () -> {
-            registrationPage.setFirstName(firstName)
-                    .setLastName(lastName)
-                    .setUserEmail(userEmail)
-                    .setGender(gender)
-                    .setUserNumber(userNumber)
-                    .setBirthDay(day, month, year)
-                    .setSubject(subject)
-                    .setHobby(hobbies)
-                    .uploadPicture(pictureName)
-                    .setCurrentAddress(currentAddress)
-                    .setState(state)
-                    .setCity(city)
+            registrationPage
+                    .setFirstName(TestData.firstName)
+                    .setLastName(TestData.lastName)
+                    .setUserEmail(TestData.userEmail)
+                    .setGender(TestData.gender)
+                    .setUserNumber(TestData.userNumber)
+                    .setBirthDay(TestData.day, TestData.month, TestData.year)
+                    .setSubject(TestData.subject)
+                    .setHobby(TestData.hobbies)
+                    .uploadPicture(TestData.pictureName)
+                    .setCurrentAddress(TestData.currentAddress)
+                    .setState(TestData.state)
+                    .setCity(TestData.city)
                     .clickSubmitBtn();
         });
 
         step("Verify results", () -> {
             registrationPage
                     .checkModalDialogVisible()
-                    .checkResult("Student Name", firstName + " " + lastName)
-                    .checkResult("Student Email", userEmail)
-                    .checkResult("Gender", gender)
-                    .checkResult("Mobile", userNumber)
-                    .checkResult("Date of Birth", day + " " + month + "," + year)
-                    .checkResult("Subjects", subject)
-                    .checkResult("Hobbies", hobbies)
-                    .checkResult("Picture", pictureName)
-                    .checkResult("Address", currentAddress)
-                    .checkResult("State and City", state + " " + city);
+                    .checkResult("Student Name", TestData.firstName + " " + TestData.lastName)
+                    .checkResult("Student Email", TestData.userEmail)
+                    .checkResult("Gender", TestData.gender)
+                    .checkResult("Mobile", TestData.userNumber)
+                    .checkResult("Date of Birth", TestData.day + " " + TestData.month + "," + TestData.year)
+                    .checkResult("Subjects", TestData.subject)
+                    .checkResult("Hobbies", TestData.hobbies)
+                    .checkResult("Picture", TestData.pictureName)
+                    .checkResult("Address", TestData.currentAddress)
+                    .checkResult("State and City", TestData.state + " " + TestData.city);
 //                    .closeTableResponsive();
         });
     }

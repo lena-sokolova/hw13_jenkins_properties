@@ -41,5 +41,6 @@ public class RemoteTestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+
     }
 }
